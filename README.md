@@ -20,6 +20,12 @@ cd erasing
 pip install -r requirements.txt
 ```
 
+for FLUX training:
+
+```bash
+pip install --upgrade diffusers transformers torch
+```
+
 ## Training Guide
 
 ### SDv1.4
@@ -38,6 +44,13 @@ After installation, follow these instructions to train a custom ESD model for St
 ```python
 python esd_sdxl.py --erase_concept 'Van Gogh' --train_method 'esd-x-strict'
 ```
+
+### FLUX
+After installation (make sure: diffusers and transformers are up-to-date), follow these instructions to train a custom ESD model for FLUX.1-dev. Pick from following `'esd-x'`, `'esd-x-strict'` [ONLY WORKS ON 80GB GPUs - if you can do it in less memory, please open a PR, I would love to learn your tricks]:
+```python
+python esd_flux.py --erase_concept 'monster' --train_method 'esd-x' --negative_guidance 2
+```
+
 The optimization process for erasing undesired visual concepts from pre-trained diffusion model weights involves using a short text description of the concept as guidance. The ESD model is fine-tuned with the conditioned and unconditioned scores obtained from frozen SD model to guide the output away from the concept being erased. The model learns from it's own knowledge to steer the diffusion process away from the undesired concept.
 <div align='center'>
 <img src = 'images/ESD.png'>
