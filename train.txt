@@ -1,0 +1,5 @@
+python esd_flux_multi.py \
+    --erase_concept 'person' \
+    --scenes_csv scenes.csv \
+    --train_method 'esd-x' \
+    --iterations_per_scene 1400
